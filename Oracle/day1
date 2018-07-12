@@ -1,1 +1,36 @@
 day1 내용 정리
+
+--OracleXE 11 버전 다운로드 후 설치 , 
+--관리자 계정은 패스워드 설정(oracle)
+--Run SQL Commend Line 접속
+-- connect
+--ID: system, PW: 설정한 비밀번호 (oracle)
+
+
+select * from tabs; --테이블들의 정보를 확인할 수 있음
+select * from all_users; --사용자 정보 조회
+
+--오라클의 NLS (National Language Support) 아키텍처를 사용하면 데이터를 로컬 언어로 저장, 처리 및 검색 할 수 있습니다. 
+--데이터베이스 유틸리티 및 오류 메시지, 정렬 순서, 날짜, 시간, 화폐, 숫자 및 달력 규칙이 자국어 및 로켈에 자동으로 적용되도록합니다.
+-- NLS 환경설정 조회.
+select * from v$nls_parameters;
+
+--일반 계정 생성
+--생성할 계정 spring 비밀번호 summer
+--스키마 : 계정이 생성되면 그 계정이 사용할 수 있는 영역
+
+CREATE USER scott IDENTIFIED BY tiger;
+--생성하겠다. 유저 scott을 만들고 tiger로 식별하겠다.
+--ORA-01920 : 이미 계정이 존재
+
+--create session 권한 부족해서 로그인이 안될 경우 권한 추가
+GRANT create session TO scott PUBLIC;  
+--grant (사용자에게 특정권한부여.) 
+--ORA-01045: user SCOTT lacks CREATE SESSION privilege; logon denied
+
+
+GRANT connect, resource TO [ID입력]
+-- connect 테이블 생성 및 조회 권한 
+
+drop user scott;        
+--scott 계정을 삭제했습니다.
