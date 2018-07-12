@@ -32,8 +32,9 @@ GRANT create session TO scott PUBLIC;
 GRANT connect, resource TO [ID입력]
 -- connect, 테이블 생성 및 조회 권한 
 
-drop user scott;        
---scott 계정을 삭제했습니다.
+drop user scott; 
+drop user scott CASCADE;
+--scott 계정을 삭.
 
 
 
