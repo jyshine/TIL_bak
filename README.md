@@ -20,6 +20,6 @@ JAVA Pattern과 Matcher 이용하여 CK edtor로 저장된 정보의
 [온라인교육 생활코딩 지옥에서 온 Git 내용 정리](https://github.com/jyshine/TIL/blob/master/git/gitfth)
 
 2018.07.31 <ck Editor 사용법>
-[ck editor 사용방법] (https://github.com/jyshine/TIL/blob/master/ckEditor/ckeditor.txt)
+[ck editor 사용방법](https://github.com/jyshine/TIL/blob/master/ckEditor/ckeditor.txt)
 
 
