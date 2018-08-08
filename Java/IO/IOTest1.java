@@ -4,34 +4,45 @@ import java.io.IOException;
 public class IOTest1{
 	public static void main(String[] args) {
 		File dir = new File("C:\\testDir");
-		System.out.println("Á¸ÀçÇÏ¸é true:"+dir.exists());
-		System.out.println("ÆÄÀÏÀÌ¸é true:"+dir.isFile());
-		System.out.println("µğ·ºÅä¸®¸é true:"+dir.isDirectory());
-		System.out.println("°æ·Î ¹İÈ¯:"+dir.getPath());
+		System.out.println("ì¡´ì¬í•˜ë©´ true:"+dir.exists());
+		System.out.println("íŒŒì¼ì´ë©´ true:"+dir.isFile());
+		System.out.println("ë””ë ‰í† ë¦¬ë©´ true:"+dir.isDirectory());
+		System.out.println("ê²½ë¡œ ë°˜í™˜:"+dir.getPath());
 
 		
 		File dir2 = new File(dir.getPath()+File.separator+"test"+File.separator+"test1"+File.separator+"test2");
-		//½Ã½ºÅÛ¸¶´Ù °æ·Î Ç¥ÇöÀÌ ´Ù¸§ > ÀÚ¹Ù¿¡¼­´Â File.separatorÀ¸·Î ±¸ºĞ 
-		//dir.mkdir(); ÇØ´ç Æú´õ¸¸ »ı¼º
-		//dir2.mkdirs(); »óÀ§ Æú´õµµ »ı¼º
+		//ì‹œìŠ¤í…œë§ˆë‹¤ ê²½ë¡œ í‘œí˜„ì´ ë‹¤ë¦„ > ìë°”ì—ì„œëŠ” File.separatorìœ¼ë¡œ êµ¬ë¶„ 
+		//dir.mkdir(); í•´ë‹¹ í´ë”ë§Œ ìƒì„±
+		//dir2.mkdirs(); ìƒìœ„ í´ë”ë„ ìƒì„±
 		boolean flag = dir2.mkdirs();
-		System.out.println("µğ·ºÅä¸® »ı¼Í ¿©ºÎ :" + flag);
+		System.out.println("ë””ë ‰í† ë¦¬ ìƒì…© ì—¬ë¶€ :" + flag);
 		
 		File file1 = new File(dir.getPath()+File.separator+"a.xlsx");
-		System.out.println("ÆÄÀÏ °æ·Î:"+file1.getPath());
-		System.out.println("ÆÄÀÏ Á¸ÀçÇÏ¸é true:"+file1.exists());
-		System.out.println("ÆÄÀÏÀÌ¸é true:"+file1.isFile());
+		System.out.println("íŒŒì¼ ê²½ë¡œ:"+file1.getPath());
+		System.out.println("íŒŒì¼ ì¡´ì¬í•˜ë©´ true:"+file1.exists());
+		System.out.println("íŒŒì¼ì´ë©´ true:"+file1.isFile());
 		
-		//ÆÄÀÏ »ı¼º ½Ã, ÀÔÃâ·Â ¿¹¿ÜÃ³¸® ÇÊ¿ä.
+		//íŒŒì¼ ìƒì„± ì‹œ, ì…ì¶œë ¥ ì˜ˆì™¸ì²˜ë¦¬ í•„ìš”.
 		try {
 			boolean fileFlag = file1.createNewFile();
-			System.out.println("ÆÄÀÏ ÀÌ¸§:"+file1.getName()+"ÆÄÀÏ »ı¼º¿©ºÎ:"+fileFlag);
+			System.out.println("íŒŒì¼ ì´ë¦„:"+file1.getName()+"íŒŒì¼ ìƒì„±ì—¬ë¶€:"+fileFlag);
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-			System.out.println("ÆÄÀÏÀÌ¸é true:"+file1.isFile());
-			System.out.println("ÆÄÀÏ ÀÌ¸§ :"+file1.getName());
-			System.out.println("ÇØ´ç ÆÄÀÏÀ» °¡Áö°í ÀÖ´Â µğ·ºÅä¸® °æ·Î"+file1.getParent());
-			System.out.println("ÇØ´ç ÆÄÀÏÀ» °¡Áö°í ÀÖ´Â µğ·ºÅä¸® ¸íÀ» È®ÀÎ"+file1.getParentFile().getName());
+			System.out.println("íŒŒì¼ì´ë©´ true:"+file1.isFile());
+			System.out.println("íŒŒì¼ ì´ë¦„ :"+file1.getName());
+			System.out.println("í•´ë‹¹ íŒŒì¼ì„ ê°€ì§€ê³  ìˆëŠ” ë””ë ‰í† ë¦¬ ê²½ë¡œ"+file1.getParent());
+			System.out.println("í•´ë‹¹ íŒŒì¼ì„ ê°€ì§€ê³  ìˆëŠ” ë””ë ‰í† ë¦¬ ëª…ì„ í™•ì¸"+file1.getParentFile().getName());
+	}
+		
+		//í´ë”ì— ìˆëŠ” íŒŒì¼ë“¤ì„ ë°°ì—´ì— ë‹´ì•„ ì¶œë ¥í•´ë³¸ë‹¤.
+		File dir = new File("C:\\testDir");
+		String info[] = dir.list();
+		for(int i=0; i<info.length;i++) {
+			System.out.println("íŒŒì¼ ì •ë³´"+i+":"+info[i]);
+		}
+		File [] info2 = dir.listFiles();
+		for(int i=0;i<info2.length;i++)
+			System.out.println(info2[i].getName());
 	}
 }
