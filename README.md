@@ -27,3 +27,6 @@ JAVA Pattern과 Matcher 이용하여 CK edtor로 저장된 정보의
 
 2018.08.16 Design pattern with Java
 
+
+2018.08.22 JPA
+Java Persistence Api
