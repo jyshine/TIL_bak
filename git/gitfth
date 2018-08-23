@@ -58,6 +58,11 @@ find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
    3-3) add git config
       git config --global core.excludesfile ~/.gitignore_global
 
+또는
+  1) create '.gitignore' file -> touch .gitignore
+  2) insert ignore pattern -> nano .gitignore
+  3) remove file -> find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
+
 
 ignore pattern
 
