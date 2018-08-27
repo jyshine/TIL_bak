@@ -33,3 +33,5 @@ Java Persistence Api
 
 
 2018.08.27 개발 관련 TIP
+
+2018.08.27 Jquery API Selector 정리를 어떻게 할지 구상.
