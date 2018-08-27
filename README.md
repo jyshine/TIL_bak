@@ -30,3 +30,6 @@ JAVA Pattern과 Matcher 이용하여 CK edtor로 저장된 정보의
 
 2018.08.22 JPA
 Java Persistence Api
+
+
+2018.08.27 개발 관련 TIP
