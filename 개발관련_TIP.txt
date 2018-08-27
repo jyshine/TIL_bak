@@ -1,0 +1,63 @@
+구조 먼저 파악하기. 
+그냥 사용하지 말기. 
+왜? 어떻게 사용되는지 분석하기. 
+
+목포해양대학교 게시판관리, 포트폴리오 개발 피드벡
+
+1)초반에 NULL check를 하지않아 나중에 고생했었음. if 조건 걸 때 null 혹은 "" 을 먼저 사용.
+2)주석을 조금 더 디테일하게 작성하기
+3)평택 대학교 프로젝트를 그대로 가져와 사용하다보니,
+   불필요한 코드들이 많음. 
+   테이블 정리하고 필요한 데이터를 추려서 작업을 했어야 했음. 
+   또한 VO 만들 때 기존에 평택대 sql 타입에 따라 bigDecimal로 만들었음. 
+   작업할 때 불편. 
+   구현하기 전 데이터 타입에 대한 숙고가 필요했음. 
+4)Transaction 처리.
+5)thows exception 처리. 
+6)model도 서비스에 담아서 controller 깔끔하게 만들기. 
+7)validation js 따로 빼서 잘 활용하기
+8)유효성 검사 입력폼과 DB VO 데이터 타입확인하며 꼼꼼히 진행하기.
+
+광주 대학교 개발 피드벡 
+
+1)개발 완료 후에 SB 다시 확인하기.
+2)이슈 사항 정리한 부분을 따로 이슈 관리 툴을 사용해보기.
+3)한 페이지에서 처리를 할 시에는 jsp를 ajax를 불러와서 처리?
+4)상수 또는 고정 값으로 쓰이는 값을 비교 연산시 앞쪽에 배치하면 null point Exceiption을 피할 수 있다.  ex) if(GlobalEnum.BOARD_REF_ID_04.toString().equals("비교값"))
+5)공통 기능으로 DAO는 가져가되 service는 결합도 낮추기
+6)Html파일에서 <caption>태그는 시각장애인?용에서 탭탭탭 이동시 보여질수 있음?
+7)버튼 표 리스트 부분 통일 시키
+8)SQL  DEVELOPER가 비정상적으로 종료되었을 경우 SESSION이 살아 있고 테이블이 LOCK이 걸리게 된다. 그럴 땐 SESSION 조회한 후 KILL해준다
+
+SELECT
+    S.SID,
+    S.SERIAL#
+FROM
+    (
+        SELECT SID
+        FROM V$LOCK
+        WHERE ID1 IN (SELECT OBJECT_ID FROM DBA_OBJECTS WHERE OBJECT_NAME = 'IP_NMCBOARD_T')
+    ) X
+    JOIN V$SESSION S ON X.SID = S.SID;
+
+
+SID SERIAL#
+--- -------
+5   1
+6   1
+
+2. 다음 명령으로 SESSION들을 KILL한다.
+
+SQL> ALTER SYSTEM KILL SESSION '5, 1';
+SQL> ALTER SYSTEM KILL SESSION '6, 1';
+
+
+
+8)exerd 용어사전
+9) list를 마이바티스 파라미터로 보내서 처리
+10) 업그레이드 for문 활용하기
+11)set 해주는 부분 공통으로 분리
+12)input text 1개 있는 경우 엔터 되는 거 onsubmit return false
+13)img src 절대 경로 잡을 시 server.xml 설정되어 있는 docBase로 경로를 잡아 줘야한다.
+14)단축키 목록 ctrl + shift + L 
+15)많은 양의 컬럼은 엑셀로 정리하여 복붙해서 사용하는 것이 효율적이다.
