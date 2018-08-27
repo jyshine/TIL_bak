@@ -42,16 +42,15 @@
                     WHERE ID1 IN (SELECT OBJECT_ID FROM DBA_OBJECTS WHERE OBJECT_NAME = 'IP_NMCBOARD_T')
                 ) X
                 JOIN V$SESSION S ON X.SID = S.SID;
+         실행결과
+               SID SERIAL#
+               --- -------
+               5   1
+               6   1
 
-SID SERIAL#
---- -------
-5   1
-6   1
-
-2. 다음 명령으로 SESSION들을 KILL한다.
-
-SQL> ALTER SYSTEM KILL SESSION '5, 1';
-SQL> ALTER SYSTEM KILL SESSION '6, 1';
+      2. 다음 명령으로 SESSION들을 KILL한다.
+            SQL> ALTER SYSTEM KILL SESSION '5, 1';
+            SQL> ALTER SYSTEM KILL SESSION '6, 1';
 
 
 8)exerd 용어사전 사용하면 용어의 표준화를 할 수 있다.
