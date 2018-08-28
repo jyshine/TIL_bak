@@ -40,3 +40,24 @@
   <li>:target Selector</li>
   Selects the target element indicated by the fragment identifier of the document’s URI.
 </ul>
+<h2>Attribute</h2>
+<ul>
+  <li>Attribute Contains Prefix Selector [name|=”value”]</li>
+  Selects elements that have the specified attribute with a value either equal to a given string or starting with that string followed by a hyphen (-).
+  <li>Attribute Contains Selector [name*=”value”]</li>
+  Selects elements that have the specified attribute with a value containing a given substring.
+  <li>Attribute Contains Word Selector [name~=”value”]</li>
+  Selects elements that have the specified attribute with a value containing a given word, delimited by spaces.
+  <li>Attribute Ends With Selector [name$=”value”]</li>
+  Selects elements that have the specified attribute with a value ending exactly with a given string. The comparison is case sensitive.
+  <li>Attribute Equals Selector [name=”value”]</li>
+  Selects elements that have the specified attribute with a value exactly equal to a certain value.
+  <li>Attribute Not Equal Selector [name!=”value”]</li>
+  Select elements that either don’t have the specified attribute, or do have the specified attribute but not with a certain value.
+  <li>Attribute Starts With Selector [name^=”value”]</li>
+  Selects elements that have the specified attribute with a value beginning exactly with a given string.
+  <li>Has Attribute Selector [name]</li>
+  Selects elements that have the specified attribute, with any value.
+  <li>Multiple Attribute Selector [name=”value”][name2=”value2″]</li>
+  Matches elements that match all of the specified attribute filters.
+</ul>
