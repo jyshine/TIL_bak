@@ -84,3 +84,14 @@
   <li>:only-of-type Selector</li>
   Selects all elements that have no siblings with the same element name.
 </ul>
+<h2>Content Filter</h2>
+<ul>
+  <li>:contains() Selector</li>
+  Select all elements that contain the specified text.
+  <li>:empty Selector</li>
+  Select all elements that have no children (including text nodes).
+  <li>:has() Selector</li>
+  Selects elements which contain at least one element that matches the specified selector.
+  <li>:parent Selector</li>
+  Select all elements that have at least one child node (either an element or text).
+</ul>
