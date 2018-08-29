@@ -61,3 +61,26 @@
   <li>Multiple Attribute Selector [name=”value”][name2=”value2″]</li>
   Matches elements that match all of the specified attribute filters.
 </ul>
+<h2>Child Filter</h2>
+<ul>
+  <li>:first-child Selector</li>
+  Selects all elements that are the first child of their parent
+  <li>:first-of-type Selector</li>
+  Selects all elements that are the first among siblings of the same element name.
+  <li>:last-child Selector</li>
+  Selects all elements that are the last child of their parent.
+  <li>:last-of-type Selector</li>
+  Selects all elements that are the last among siblings of the same element name.
+  <li>:nth-child() Selector</li>
+  Selects all elements that are the nth-child of their parent.
+  <li>:nth-last-child() Selector</li>
+  Selects all elements that are the nth-child of their parent, counting from the last element to the first.
+  <li>:nth-last-of-type() Selector</li>
+  Selects all the elements that are the nth-child of their parent in relation to siblings with the same element name, counting from the last element to the first.
+  <li>:nth-of-type() Selector</li>
+  Selects all elements that are the nth child of their parent in relation to siblings with the same element name.
+  <li>:only-child Selector</li>
+  Selects all elements that are the only child of their parent.
+  <li>:only-of-type Selector</li>
+  Selects all elements that have no siblings with the same element name.
+</ul>
