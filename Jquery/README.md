@@ -95,3 +95,36 @@
   <li>:parent Selector</li>
   Select all elements that have at least one child node (either an element or text).
 </ul>
+<h2>Form</h2>
+<ul>
+  <li>:button Selector</li>
+  Selects all button elements and elements of type button.
+  <li>:checkbox Selector</li>
+  Matches all elements that are checked or selected.
+  <li>:checked Selector</li>
+  Matches all elements that are checked or selected.
+  <li>disable Selector</li>
+  Selects all elements that are disabled.
+  <li>enable selector</li>
+  Selects all elements that are enabled.
+  <li>file Selector</li>
+  Selects all elements of type file.
+  <li>:focus Selector</li>
+  Selects element if it is currently focused.
+  <li>:image Selector</li>
+  Selects all elements of type image.
+  <li>:input Selector</li>
+  Selects all input, textarea, select and button elements.
+  <li>:password Selector</li>
+  Selects all elements of type password.
+  <li>:radio Selector</li>
+  Selects all elements of type radio.
+  <li>:reset Selector</li>
+  Selects all elements of type reset.
+  <li>:selected Selector</li>  
+  Selects all elements that are selected
+  <li>:submit Selector</li> 
+  Selects all elements that are selected
+  <li>:text Selector</li>
+  Selects all input elements of type text.
+</ul>
