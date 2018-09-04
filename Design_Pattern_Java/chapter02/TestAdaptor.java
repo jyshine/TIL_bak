@@ -9,5 +9,9 @@ public class TestAdaptor {
 		Print p = new PrintBanner("Hello! Adaptor Pattern");
 		p.printWeak();
 		p.printStrong();
+		
+		Print2 p2 = new PrintBanner2("Hello!");
+		p2.printWeak();
+		p2.printStrong();
 	}
 }
