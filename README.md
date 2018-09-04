@@ -38,3 +38,5 @@ Java Persistence Api
 
 2018.09.04 Lombok Java 라이브러리 getter/setter 기타 메소드들을 annotation으로 생성할 수 있음.<br>
 2018.09.04 ObjectUtil Map to Object , Object to Map
+2018.09.04 개발자 도구에서 css color를 확인할 수 있다. <br>
+개발자 도구에서 아무 색이나 클릭한 후에 그 색을 클릭 후  네모박스에 칼라를 클릭하면 확인가능.
