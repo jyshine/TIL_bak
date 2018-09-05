@@ -40,3 +40,5 @@ Java Persistence Api
 2018.09.04 ObjectUtil Map to Object , Object to Map <br>
 2018.09.04 개발자 도구에서 css color를 확인할 수 있다. <br>
 개발자 도구에서 아무 색이나 클릭한 후에 그 색을 클릭 후  네모박스에 칼라를 클릭하면 확인가능.
+2018.09.05 java에서 리스트간 비교할 때 CollectionUtils 또는 ListUtils사용하면 
+
