@@ -42,3 +42,18 @@ Java Persistence Api
 개발자 도구에서 아무 색이나 클릭한 후에 그 색을 클릭 후  네모박스에 칼라를 클릭하면 확인가능.
 2018.09.05 java에서 리스트간 비교할 때 CollectionUtils 또는 ListUtils사용하면 
 
+2018.09.07 한글파일,PDF 다운로드 시 깨지는 현상
+    <mime-mapping>
+      <extension>zip</extension>
+      <mime-type>application/zip</mime-type>
+    </mime-mapping>
+    
+ <mime-mapping>
+     <extension>hwp</extension>
+      <mime-type>application/unknown</mime-type>
+   </mime-mapping>
+
+<mime-mapping>
+<extension>pdf</extension>
+<mime-type>application/pdf</mime-type>
+</mime-mapping>
