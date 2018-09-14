@@ -57,3 +57,6 @@ Java Persistence Api
 <extension>pdf</extension>
 <mime-type>application/pdf</mime-type>
 </mime-mapping>
+
+2018.09.14 Oracle View 테이블 사용 <br>
+http://www.oracletutorial.com/oracle-view/oracle-create-view/
