@@ -59,4 +59,13 @@ Java Persistence Api
 </mime-mapping>
 
 2018.09.14 Oracle View 테이블 사용 <br>
-http://www.oracletutorial.com/oracle-view/oracle-create-view/
+http://www.oracletutorial.com/oracle-view/oracle-create-view/<br>
+
+2018.09.19 console 로그 안짤리게 하는 방법. <br>
+이클립스 window > Preferences > Run/Debug > Console : Limit console output 체크해제.
+
+2018.09.19 input tag 안에는 title 혹은 lable 필수 (웹표준 기준) <br>
+시각장애인 전용으로 웹 소개시 필요. table 만들 시 caption도 필요.<br>
+
+2018.09.19 IE11 에서 DOM7009 에러 <br>
+http://hyunchang88.tistory.com/151
