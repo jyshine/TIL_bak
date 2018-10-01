@@ -1,0 +1,150 @@
+
+1.pom.xml 라이브러리 추가
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
+2.spring 컨테이너에 주입
+	<bean id="spring.RegularCommonsMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 100GB -->
+		<property name="maxUploadSize"		value="107374182400" />
+		<!-- 1GB -->
+		<property name="maxInMemorySize"	value="1073741824" />
+	</bean>
+
+	<!-- choose one from above and alias it to the name Spring expects -->
+	<!-- alias name="local.MultiCommonsMultipartResolver" alias="multipartResolver"/ -->
+	<alias alias="multipartResolver" name="spring.RegularCommonsMultipartResolver" />	
+
+3.jsp form에 encoding type enctype="multipart/form-data" 
+<h1>file upload test</h1>
+<form action="${pageContext.request.contextPath}/fileUploadTest.do" method="post" enctype="multipart/form-data" >
+	email : <input type="text" name="email"> <br><br>
+	file : <input type="file" name="fileVal"><br><br>
+	file : <input type="file" name="fileVal2"><br><br>
+	<input type="submit" value="submit">
+</form>
+4.Controller에서 파일 받기
+	@RequestMapping(value = "/fileUploadTest.do")
+	public String fileUploadTest(final MultipartHttpServletRequest multiRequest,
+			@RequestParam Map<String, Object> params) throws Exception {
+		
+		FileAttachMentService fileAttachMentService = new FileAttachMentService();
+		
+		logger.info("fileUploadTest controller");
+		logger.info("fileUploadTest controller params val" + params.get("email").toString());
+		
+		final Map<String, MultipartFile> files = multiRequest.getFileMap();
+		logger.info("fileUpload1" + files.toString());
+		
+		if (!files.isEmpty()) {
+			fileAttachMentService.multipleFileUpload(files, params.get("email").toString(),"dains", "fileid");
+			}
+		
+		return "home";
+	}
+  5.service에서 업로드 처리
+  
+public class FileAttachMentService {
+	protected final Logger log = LoggerFactory.getLogger(this.getClass().getName());
+	private final String fileStorePath = "C:/data/kyc/";
+	
+		// 첨부파일 업로드
+		public List<FileVO> multipleFileUpload(Map<String, MultipartFile> files, String fileCategory,
+				String regId, String updateFileId) throws Exception {
+
+			FileVO fileVO = new FileVO(); // FileVO 객체 생성.
+			File saveFolder = new File(fileStorePath + fileCategory);
+			List<FileVO> result = new ArrayList<FileVO>(); // 저장한 첨부파일들을 리스트로 담아서 반환.
+			List<FileVO> fileList = null;
+
+			// FileVO 세팅을 위한 변수
+			String fileId = "";
+			String fileNo = "";
+			String fileOrgName = "";
+			String fileType = "";
+			String newFileName = "";
+			String filePath = "";
+			String fileSavePath = "";
+
+			if (updateFileId != null && updateFileId != "") {
+				fileId = updateFileId;
+			}
+			// entrySet으로 map에 정의된 key 값과 value값을 fileItr에 담아줌.
+			Iterator<Entry<String, MultipartFile>> fileItr = files.entrySet().iterator();
+
+			while (fileItr.hasNext()) {
+				MultipartFile file = fileItr.next().getValue();
+				// getOriginalFilename 비어있으면, fileId 생성 하지 않음.
+				if ("".equals(file.getOriginalFilename()) || null == file.getOriginalFilename()) {
+					continue;
+				} else {
+					if ("".equals(fileId)) {
+						// fileId 생성
+//						fileId = fileIdGnrService.getNextStringId();
+					}
+				}
+				// fileId 세팅
+				fileVO.setFileId(fileId);
+
+				// CK에디터 이미지 업로드인지 구분
+				if (fileCategory.equals("editor")) {
+					fileNo = "0";
+				} else {
+					// 첨부파일이 몇번째인지 구분.
+					fileNo = file.getName().substring(file.getName().length() - 1);
+				}
+
+				// 기존에 저장된 파일이 있으면 삭제 후 진행
+//				if (fileNo != null) {
+//					fileList = fileAttachmentDao.selectFileList(fileVO);
+//					for (int i = 0; i < fileList.size(); i++) {
+//						// 저장하려는 fileNo가 기존 테이블에 있으면 delete한 후 등록 진행
+//						if (fileList.get(i).getFileNo().equals(fileNo)) {
+//							fileVO.setFileNo(fileNo);
+//							deleteFile(fileVO);
+//						}
+//					}
+//				}
+
+				fileOrgName = file.getOriginalFilename();
+
+				if (!"".equals(fileOrgName)) {
+					int index = fileOrgName.lastIndexOf(".");
+
+					fileType = fileOrgName.substring(index + 1);
+					newFileName = UUID.randomUUID().toString() + System.currentTimeMillis();
+					filePath = fileStorePath;
+					fileSavePath = filePath + fileCategory + "/" + newFileName + "." + fileType;
+
+					fileVO.setFileNo(fileNo);
+					fileVO.setFileCategory(fileCategory);
+					fileVO.setRegId(regId);
+					fileVO.setFileName(newFileName);
+					fileVO.setFilePath(filePath);
+					fileVO.setFileOrgName(fileOrgName);
+					fileVO.setFileExt(fileType);
+					fileVO.setFileSize(Long.toString(file.getSize()));
+
+					if (!saveFolder.exists() || saveFolder.isFile()) {
+						saveFolder.mkdirs();
+					}
+
+					file.transferTo(new File(fileSavePath));
+//					fileAttachmentDao.insertFile(fileVO);
+
+					result.add(fileVO);
+
+				}
+			}
+			return result;
+		}
+}
