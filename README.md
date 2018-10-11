@@ -75,3 +75,34 @@ http://hyunchang88.tistory.com/151
 2018.09.27 카카오 코딩 테스트 
 
 2018.10.11 게시판 이전글 다음글 가져오는 쿼리 
+
+
+jsp의 jstl 의 값을 javascript의 변수로 넣는 방법
+프로그래밍/JavaScript 2014.11.19 09:45
+<c:set var="checkDate" var='${request.getParameter("Date")}' />
+
+이렇게 받아온 CheckDate를
+
+ 
+
+javascript의 변수인
+
+var chDate 라는 변수가 있을 때
+
+checkDate값을 chDate에 넣어주고 싶습니다.
+
+
+
+이런질문이있었다 
+
+
+
+답은
+
+
+
+var chDate = '<c:out value="${checkDate}"/>';  이렇게 하면된다.
+
+
+
+출처: http://adgw.tistory.com/entry/jsp의-jstl-의-값을-javascript의-변수로-넣는-방법 [앗뜨거워
