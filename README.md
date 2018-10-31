@@ -106,3 +106,6 @@ var chDate = '<c:out value="${checkDate}"/>';  이렇게 하면된다.
 
 
 출처: http://adgw.tistory.com/entry/jsp의-jstl-의-값을-javascript의-변수로-넣는-방법 [앗뜨거워
+
+2018.10.31 JqGrid Document <br>
+http://www.guriddo.net/documentation/guriddo/javascript/
