@@ -109,3 +109,9 @@ var chDate = '<c:out value="${checkDate}"/>';  이렇게 하면된다.
 
 2018.10.31 JqGrid Document <br>
 http://www.guriddo.net/documentation/guriddo/javascript/
+
+
+
+json list
+
+log
