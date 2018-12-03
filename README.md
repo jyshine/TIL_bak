@@ -115,3 +115,16 @@ http://www.guriddo.net/documentation/guriddo/javascript/
 json list
 
 log
+
+2018.12.03 <br>
+
+ netstat -antl 
+ 서버 접속자 확인
+ top  
+cpu%  시스템 사용량 확인
+
+ps -ef | grep java 
+프로세스를 확인 | 자바 
+
+
+
