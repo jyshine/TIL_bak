@@ -131,14 +131,14 @@ ps -ef | grep java
 http://openeg.co.kr/383 참고
 <br>
 	web.xml
-    <filter>
-		<filter-name>xssFilter</filter-name>
-		<filter-class>com.pack1.pack2.XSSFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>xssFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+//    <filter>
+//		<filter-name>xssFilter</filter-name>
+//		<filter-class>com.pack1.pack2.XSSFilter</filter-class>
+//	</filter>
+//	<filter-mapping>
+//		<filter-name>xssFilter</filter-name>
+//		<url-pattern>/*</url-pattern>
+//	</filter-mapping>
 <br>------------------------------------------------------------------------------   
     import java.io.IOException;
 
