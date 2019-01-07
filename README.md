@@ -127,4 +127,213 @@ ps -ef | grep java
 프로세스를 확인 | 자바 
 
 
+2019.01.07 XSS 공격 방지  <br>
+http://openeg.co.kr/383 참고
+<br>
+	web.xml
+    <filter>
+		<filter-name>xssFilter</filter-name>
+		<filter-class>com.pack1.pack2.XSSFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>xssFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+<br>------------------------------------------------------------------------------   
+    import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+
+public class XSSFilter implements Filter {
+
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+
+	}
+
+	@Override
+	public void destroy() {
+
+	}
+
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
+		
+		//Logger.debug("xss filter running...");
+		
+		chain.doFilter(new XSSRequestWrapper((HttpServletRequest) request), response);
+
+	}
+}
+    
+    
+<br>------------------------------------------------------------------------------
+package com.dainleaders.common;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+
+
+/**
+ * XSS
+ * @author exD984
+ *
+ */
+public class XSSRequestWrapper extends HttpServletRequestWrapper {
+
+//	private static final Pattern[] patterns = new Pattern[] {
+//			Pattern.compile("<script>(.*?)</script>", Pattern.CASE_INSENSITIVE),
+//			Pattern.compile("src[\r\n]*=[\r\n]*\\\'(.*?)\\\'", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL),
+//			Pattern.compile("src[\r\n]*=[\r\n]*\\\"(.*?)\\\"", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL),
+//			Pattern.compile("</script>", Pattern.CASE_INSENSITIVE),
+//			Pattern.compile("<script(.*?)>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL),
+//			Pattern.compile("eval\\((.*?)\\)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL),
+//			Pattern.compile("expression\\((.*?)\\)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL),
+//			Pattern.compile("javascript:", Pattern.CASE_INSENSITIVE),
+//			Pattern.compile("vbscript:", Pattern.CASE_INSENSITIVE),
+//			Pattern.compile("onload(.*?)=", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL),
+//	};
+	
+	public XSSRequestWrapper(HttpServletRequest servletRequest) {
+
+		super(servletRequest);
+
+	}
+
+	@Override
+	public String[] getParameterValues(String parameter) {
+        //System.out.println("getParameterValues");
+		String[] values = super.getParameterValues(parameter);
+		if (values == null) {
+			return null;
+		}
+
+		int count = values.length;
+
+		String[] encodedValues = new String[count];
+		for (int i = 0; i < count; i++) {
+			encodedValues[i] = stripXSS(values[i]);
+		}
+
+		return encodedValues;
+
+	}
+
+	@Override
+	public String getParameter(String parameter) {
+		String value = super.getParameter(parameter);
+		
+		value = stripXSS(value);
+		
+		//System.out.println("[" + parameter + "]=" + value);
+
+		return value;
+
+	}
+
+	@Override
+	public String getHeader(String name) {
+		//System.out.println("getHeader");
+		String value = super.getHeader(name);
+		return stripXSS(value);
+
+	}
+
+	/**
+	 * XSS Filter   
+	 * @param value
+	 * @return
+	 */
+	public static String stripXSS(String value) {
+		if(!StringUtil.isEmpty(value) && isStripXSS(value)) {
+			//value = value.replaceAll("<", "&lt;").replaceAll(">", "&gt;");	
+			//value = "XSS Filtered";
+			
+			// XXX
+//			value = value.replaceAll("<", "&lt;");
+//			value = value.replaceAll(">", "&gt;;");
+//			value = value.replaceAll("\\(", "&#40;");
+//			value = value.replaceAll("\\)", "#41;");
+//			value = value.replaceAll("#", "#35;");
+//			value = value.replaceAll("&", "#38;");
+//			value = value.replaceAll("\"", "&quot;");
+//			value = value.replaceAll("'", "&apos;");
+			
+			value = value.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+	        value = value.replaceAll("\\(", "&#40;").replaceAll("\\)", "&#41;");
+	        //value = value.replaceAll("\"", "&quot;");
+	        //value = value.replaceAll("'", "&#39;");
+			//value = value.replaceAll("#", "#35;");
+			//value = value.replaceAll("&", "#38;");
+	        
+//	        value = value.replaceAll("eval\\((.*)\\)", "");
+//	        value = value.replaceAll("expression\\((.*)\\)", "");
+//	        value = value.replaceAll("[\\\"\\\'][\\s]*javascript:(.*)[\\\"\\\']", "\"\"");
+//	        value = value.replaceAll("[\\\"\\\'][\\s]*vbscript:(.*)[\\\"\\\']", "\"\"");
+	        //value = value.replaceAll("script", "");
+		}
+		return value;
+	}
+	
+	public static String unstripXSS(String value) {
+		if(!StringUtil.isEmpty(value) && isUnStripXSS(value)) {
+			value = value.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+	        value = value.replaceAll("&#40;", "\\(").replaceAll("&#41;", "\\)");
+		}
+		return value;
+	}
+	
+	/**
+	 * StripXSS
+	 * @param value
+	 * @return
+	 */
+	public static boolean isStripXSS(String value) {
+		boolean isStripXSS = StringUtil.isEmpty(value) ? false : true;
+		
+		return isStripXSS;
+	}
+	
+	public static boolean isUnStripXSS(String value) {
+		boolean isStripXSS = StringUtil.isEmpty(value) ? false : 
+			value.indexOf("&lt;") != -1 || value.indexOf("&gt;") != -1 || value.indexOf("&#40;") != -1 || value.indexOf("&#41;") != -1;
+		
+		return isStripXSS;
+	}
+	
+//	public static boolean isStripXSS(String value) {
+//		boolean isStripXSS = false;
+//		
+//		if (value != null) {
+//
+//			for (Pattern scriptPattern : patterns) {
+//				if ( scriptPattern.matcher(value).matches() ) {
+//					isStripXSS = true;
+//					break;
+//				}
+//			}
+//		}
+//		return isStripXSS;
+//	}
+	
+	public static void main(String[] args) {
+		String value = "";
+		//String value = "<script>alert('test')</script>";
+		
+		boolean isStrip = isUnStripXSS(value);
+		String newValue = unstripXSS(value);
+		
+		System.out.println(isStrip);
+		System.out.println(value+"|"+newValue);
+		
+		System.exit(0);
+	}
+}
 
