@@ -337,3 +337,10 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
 	}
 }
 
+
+
+
+
+
+--2019.02.20
+copy from userid/pw@000.000.00.00:1521/orcl insert INDUK_TMENTORHISTORY using select * from INDUK_TMENTORHISTORY;
